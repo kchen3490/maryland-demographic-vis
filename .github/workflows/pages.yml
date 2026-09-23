@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger the deployment on push to the main/master branch
+  push:
+    branches: ["main", "master"]
+
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+# Set permissions for GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments from stepping on each other
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+        
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload 'site' directory as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # This specifies that only the contents of the 'site' folder should be deployed!
+          path: './site'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
