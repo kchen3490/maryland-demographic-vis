@@ -35,11 +35,15 @@ const friendlyLabels = {
 const options = ['white', 'black', 'hispanic', 'asian', 'native', 'islander', 'other', 'two_or_more'];
 
 // Create SVG and g
+const svgWidth = width + margin.left + margin.right;
+const svgHeight = height + margin.top + margin.bottom;
 const svg = d3
     .select("#vis")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .style("width", "100%")
+    .style("height", "auto")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -197,8 +201,8 @@ function updateVis() {
                         const count = d.current_selected_count.toLocaleString();
                         const pct = d.current_selected_pct.toFixed(1);
 
-                        d3.select('#tooltip')
-                            .style("display", 'block')
+                        const tooltip = d3.select('#tooltip');
+                        tooltip.style("display", 'block')
                             .html(`
                                 <strong>${name}</strong><br/>
                                 Total Population: ${total}<br/>
@@ -206,8 +210,17 @@ function updateVis() {
                                 <strong>Selected Groups</strong><br/>
                                 Count: ${count}<br/>
                                 Percentage: ${pct}%
-                            `)
-                            .style("left", (event.pageX + 15) + "px")
+                            `);
+                        
+                        // Prevent overflow off the right side of the screen
+                        const tooltipNode = tooltip.node();
+                        const tooltipWidth = tooltipNode.offsetWidth;
+                        let xPos = event.pageX + 15;
+                        if (xPos + tooltipWidth > window.innerWidth) {
+                            xPos = event.pageX - tooltipWidth - 15;
+                        }
+
+                        tooltip.style("left", xPos + "px")
                             .style("top", (event.pageY - 28) + "px");
 
                         // Highlight hovered county
