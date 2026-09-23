@@ -4,25 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maryland Demographics Visualization</title>
+    <title>Maryland Demographics: Interactive Visualization with D3.js</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <div class="container"> <!-- Centers content and sets max width -->
         <h2><strong>Maryland Demographics</strong></h2>
+        <p>Interactive visualization using US Census Bureau ACS 5-Year Data.</p>
 
         <div id="controls">
-            <!-- placeholder the demographic dropdown button -->
-            Demographic: <select id="demographic_dropdown" class="variable"></select>
+            <div class="custom-dropdown">
+                <button id="dropdown-btn" class="dropdown-btn">Select Demographics (1)</button>
+                <div id="dropdown-content" class="dropdown-content">
+                    <div id="demographic_checkboxes"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="summary-text" style="margin-top: 15px; font-size: 15px; background: #eef2f5; padding: 10px; border-radius: 4px; border-left: 4px solid #3182bd;">
+            <!-- Will be populated by D3 -->
         </div>
 
         <div id="vis"></div> <!--  Will hold our visualization (SVG) -->
 
         <div id="tooltip" style="display:none"></div> 
+
+        <!-- Footnote and Source -->
+        <div id="footer" style="margin-top: 2rem; font-size: 13px; color: #666; border-top: 1px solid #ccc; padding-top: 10px;">
+            <p><strong>Source:</strong> Data is pulled from the <a href="https://data.census.gov/table?q=B03002" target="_blank" style="color: #3182bd;">US Census Bureau (2022 ACS 5-Year Estimates, Table B03002)</a>.</p>
+            <p id="asterisk-note" style="display: none;"></p>
+        </div>
     </div>
 
     <!-- Load D3.js -->
     <script src="https://d3js.org/d3.v7.js"></script>
     <script src="js/script.js"></script>
 </body>
+</html>
