@@ -1,20 +1,16 @@
 /* Reset default styles */
 * {
-    box-sizing: border-box;
-}
-
-body {
     font-family: 'Century Gothic', Arial, sans-serif;
+    max-width: 800px;
+    margin: 0px auto;
     line-height: 1.8;
-    margin: 0;
-    padding: 0;
 }
 
 /* Container styling for layout */
 .container {
     max-width: 800px;
-    margin: 1rem auto;
-    padding: 0 15px;
+    margin: 2rem auto;
+    font-family: 'Century Gothic', Arial, sans-serif;
 }
 
 /* Vis styling */
@@ -44,8 +40,6 @@ body {
     z-index: 10;
     line-height: 1.4;
     min-width: 200px;
-    max-width: 80vw; /* Prevent tooltip from being wider than screen on mobile */
-    word-wrap: break-word;
 }
 
 /* Controls */
@@ -61,7 +55,6 @@ body {
     position: relative;
     display: inline-block;
     font-family: 'Century Gothic', Arial, sans-serif;
-    width: 100%;
 }
 
 .dropdown-btn {
@@ -72,7 +65,7 @@ body {
     cursor: pointer;
     font-size: 14px;
     font-family: inherit;
-    width: 100%;
+    min-width: 300px;
     text-align: left;
     display: flex;
     justify-content: space-between;
@@ -89,7 +82,7 @@ body {
     display: none;
     position: absolute;
     background-color: white;
-    width: 100%;
+    min-width: 300px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 100;
     border: 1px solid #ddd;
