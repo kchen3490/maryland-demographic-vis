@@ -1,11 +1,6 @@
-name: Deploy to GitHub Pages
+name: Legacy GitHub Pages deployment
 
 on:
-  # Trigger the deployment on push to the main/master branch
-  push:
-    branches: ["main", "master"]
-
-  # Allow manual triggering from the Actions tab
   workflow_dispatch:
 
 # Set permissions for GITHUB_TOKEN to allow deployment to GitHub Pages

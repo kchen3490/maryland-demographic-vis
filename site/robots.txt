@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salmon-wave-0b7860a0f.4.azurestaticapps.net/
